@@ -16,22 +16,24 @@
 //     //stage -02 ended here     
 // }
 
-pipeline {
-    agent any 
+node ('test') {
+    stage ('checkout') {
+        git 'https://github.com/srikarjanga/html.git'
+    }
 
-    stages {
-        stage ('SCM Checkout') {
+    stage ('command') {
+        sh label: '', script: 'sudo cp /home/ubuntu/Srikar/workspace/html-pipelines/* /var/www/html/'
+    }
 
-            steps {
-                git 'https://github.com/srikarjanga/html.git'
-                echo "This is bring our source code from github"
-            }
+    stage ('srikar') {
+        echo "This is srikar stage"
+    } 
 
-        stage ('command') {
-            steps {
-                sh label: '', script: 'sudo cp /home/ubuntu/Srikar/workspace/html-pipelines/* /var/www/html/'
-            }
-        }
-        }
+    stage ('satish') {
+        echo "This is satish stage"
+    }
+
+    stage ('deepa') {
+        echo "This is deepa stage"
     }
 }
